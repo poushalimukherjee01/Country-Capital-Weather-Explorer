@@ -1,0 +1,6 @@
+# Ignore API key file
+config.js
+
+# Node / system files (optional, safe practice)
+node_modules/
+.DS_Store
