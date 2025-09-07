@@ -20,58 +20,70 @@ A simple **web app** to explore any country and check the **live weather** of it
       │── .gitignore # Ensures config.js is ignored 
       │── README.md # Documentation 
       
-      --- ## ⚙️ Setup Instructions
+      ---## ⚙️ Setup Instructions
        1. **Clone the Repository**
         Run this command in your terminal:
 bash
    git clone https://github.com/poushalimukherjee01/Country-Capital-Weather-Explorer.git
    cd Country-Capital-Weather-Explorer
    
-2. API Key Setup (Important 🔑)
+## 🔑 API Key Setup (Important)
 
- 1.Go to OpenWeatherMap
-and create a free account
+1. Go to [OpenWeatherMap](https://openweathermap.org/) and **create a free account**.  
+2. Copy your **API key** from the "API Keys" section in your OpenWeatherMap dashboard.  
+3. In your project folder, **create a new file** named config.js.  
+4. Paste the following code inside config.js:  
+   
+   const API_KEY = "your_api_key_here";
+5.Save the file.
 
- 2.Copy your API key from the API Keys section
+⚠️ Important:
 
- 3.In your project folder, create a file named config.js
+Do not commit config.js to GitHub (it’s already listed in .gitignore).
 
- 4. Paste this inside config.js:
- 
- const API_KEY = "your_api_key_here";
+Instead, use the provided config.example.js file as a template to share with others
 
-5. Save the file
 
-⚠️ Note: Do not commit config.js to GitHub (it’s already in .gitignore).
-Instead, use the provided config.example.js as a template.
-Run the Project Locally
+---
 
-1. Open the folder in VS Code
 
-2. Install the Live Server extension (if not installed)
+▶️ Run the Project Locally
 
-3. Right-click index.html → Open with Live Server
+1.Open the folder in VS Code.
 
-Or simply double-click index.html to open in your browser
+2.Install the Live Server extension (if not installed).
 
-🚀 Deployment (GitHub Pages)
+3.Right-click index.html → Open with Live Server.
 
-1.Push your project to a public GitHub repository
+4.Or simply double-click index.html to open in your browser 
 
-2.Go to your repository → Settings → Pages
-
-3.Under Branch, select main and /root
-
-4.Save → Your project will be live at:
-(https://poushalimukherjee01.github.io/country-and-capital-weather-explorer/)
 
 🛠 Tech Stack
 
-Frontend: HTML, CSS, JavaScript
+1.Frontend: HTML, CSS, JavaScript
 
-APIs: REST Countries API, OpenWeatherMap API
+2.APIs: REST Countries API, OpenWeatherMap API
 
-Deployment: GitHub Pages
+3.Deployment: GitHub Pages
+
+🚀 Deployment (GitHub Pages)
+
+1.Push the project to a public GitHub repository.
+
+2.Go to the repository → Settings → Pages.
+
+3.Under Branch, select main and / (root).
+
+4.Click Save.
+
+5.The live site will be available at : https://poushalimukherjee01.github.io/Country-Capital-Weather-Explorer/
+
+Project Links
+
+Repository: https://github.com/poushalimukherjee01/Country-Capital-Weather-Explorer
+
+Live Demo: https://poushalimukherjee01.github.io/Country-Capital-Weather-Explorer/
+
 👩‍💻 **Author**  
 Built with ❤️ by **Poushali Mukherjee**
 
