@@ -29,19 +29,27 @@ bash
    
 ## 🔑 API Key Setup (Important)
 
-1. Go to [OpenWeatherMap](https://openweathermap.org/) and **create a free account**.  
-2. Copy your **API key** from the "API Keys" section in your OpenWeatherMap dashboard.  
-3. In your project folder, **create a new file** named config.js.  
-4. Paste the following code inside config.js:  
-   
-   const API_KEY = "your_api_key_here";
-5.Save the file.
+1.Go to OpenWeatherMap
+ and create a free account.
 
-⚠️ Important:
+2.Copy your API key from the "API Keys" section in your OpenWeatherMap    dashboard.
 
-Do not commit config.js to GitHub (it’s already listed in .gitignore).
+3.In your project folder, you will see a file named config.example.js.
 
-Instead, use the provided config.example.js file as a template to share with others
+4.Make a copy of this file and rename it to config.js.
+
+5.Open config.js and replace:
+
+const API_KEY = "your_api_key_here";
+with your own API key.
+
+6.Save the file.
+
+⚠️ Note:
+
+config.js is listed in .gitignore, so it will never be pushed to GitHub (this keeps your key safe).
+
+Only config.example.js is shared in the repo as a template.
 
 
 ---
