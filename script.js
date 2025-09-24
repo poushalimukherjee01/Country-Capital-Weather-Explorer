@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const countryInput = document.getElementById("countryInput");
     const results = document.getElementById("results");
     const darkModeToggle = document.getElementById("darkModeToggle");
+    const geoBtn = document.getElementById("geoBtn");
 
     // Dark Mode Toggle
     darkModeToggle.addEventListener("change", () => {
@@ -14,20 +15,19 @@ document.addEventListener("DOMContentLoaded", () => {
         results.innerHTML = `<p>🔄 Fetching data, please wait...</p>`;
     }
 
-    // Fetch Weather
-    async function fetchWeather(capital, countryCode) {
-        if (!capital) return null;
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(capital)},${countryCode}&units=metric&appid=${API_KEY}`;
+    // Fetch Weather (Open-Meteo, no API key)
+    async function fetchWeather(lat, lon) {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
         try {
             const res = await fetch(url);
             const data = await res.json();
-            return data.cod === 200 ? data : null;
+            return data.current_weather || null;
         } catch {
             return null;
         }
     }
 
-    // Fetch Country
+    // Fetch Country (RestCountries API)
     async function fetchCountry(countryName) {
         if (!countryName) {
             results.innerHTML = `<p>⚠️ Please enter a country name</p>`;
@@ -51,17 +51,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (exactMatch) {
                 const capital = exactMatch.capital ? exactMatch.capital[0] : null;
-                const countryCode = exactMatch.cca2;
-                const weather = await fetchWeather(capital, countryCode);
+                const lat = exactMatch.capitalInfo?.latlng?.[0];
+                const lon = exactMatch.capitalInfo?.latlng?.[1];
+
+                let weather = null;
+                if (lat && lon) {
+                    weather = await fetchWeather(lat, lon);
+                }
                 displayResults(exactMatch, weather);
             } else {
                 const suggestions = data.slice(0, 5).map(c => c.name.common);
                 results.innerHTML = `
-          <p>No exact match found. Did you mean:</p>
-          <ul>
-            ${suggestions.map(c => `<li><button class="suggestion">${c}</button></li>`).join("")}
-          </ul>
-        `;
+                  <p>No exact match found. Did you mean:</p>
+                  <ul>
+                    ${suggestions.map(c => `<li><button class="suggestion">${c}</button></li>`).join("")}
+                  </ul>
+                `;
                 document.querySelectorAll(".suggestion").forEach(btn => {
                     btn.addEventListener("click", () => fetchCountry(btn.textContent));
                 });
@@ -70,7 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
             results.innerHTML = `<p>⚠️ Error fetching country data. Please try again later.</p>`;
         }
     }
-    const geoBtn = document.getElementById("geoBtn");
 
     // Geolocation handler
     geoBtn.addEventListener("click", () => {
@@ -79,17 +83,17 @@ document.addEventListener("DOMContentLoaded", () => {
             navigator.geolocation.getCurrentPosition(async (pos) => {
                 const { latitude, longitude } = pos.coords;
                 try {
-                    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${API_KEY}`;
-                    const res = await fetch(url);
-                    const data = await res.json();
+                    const weather = await fetchWeather(latitude, longitude);
 
-                    if (data && data.sys && data.sys.country) {
-                        // Fetch country details using ISO2 country code
-                        const countryRes = await fetch(`https://restcountries.com/v3.1/alpha/${data.sys.country}`);
-                        const countryData = await countryRes.json();
-                        const country = countryData[0];
+                    // Fetch country details using reverse lookup
+                    const countryRes = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
+                    const countryData = await countryRes.json();
 
-                        displayResults(country, data);
+                    if (countryData && countryData.address && countryData.address.country_code) {
+                        const countryAlpha2 = countryData.address.country_code.toUpperCase();
+                        const countryInfoRes = await fetch(`https://restcountries.com/v3.1/alpha/${countryAlpha2}`);
+                        const countryInfo = await countryInfoRes.json();
+                        displayResults(countryInfo[0], weather);
                     } else {
                         results.innerHTML = "<p>Could not fetch location data.</p>";
                     }
@@ -104,19 +108,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-
     // Display Results
     function displayResults(country, weather) {
         results.innerHTML = `
-      <img src="${country.flags.svg}" alt="Flag of ${country.name.common}">
-      <h2>${country.name.common}</h2>
-      <p><strong>Capital:</strong> ${country.capital ? country.capital[0] : "N/A"}</p>
-      <p><strong>Population:</strong> ${country.population.toLocaleString()}</p>
-      ${weather ? `
-        <p><strong>Weather in ${country.capital[0]}:</strong> ${weather.main.temp}°C, ${weather.weather[0].description}</p>
-        <img src="https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png" alt="Weather icon">`
-                : `<p>🌥️ Weather data not available</p>`}
-    `;
+          <img src="${country.flags.svg}" alt="Flag of ${country.name.common}">
+          <h2>${country.name.common}</h2>
+          <p><strong>Capital:</strong> ${country.capital ? country.capital[0] : "N/A"}</p>
+          <p><strong>Population:</strong> ${country.population.toLocaleString()}</p>
+          ${weather ? `
+            <p><strong>Weather in ${country.capital ? country.capital[0] : "your location"}:</strong> ${weather.temperature}°C, Windspeed ${weather.windspeed} km/h</p>
+          ` : `<p>🌥️ Weather data not available</p>`}
+        `;
     }
 
     // Event Listeners
@@ -125,3 +127,4 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.key === "Enter") searchBtn.click();
     });
 });
+
