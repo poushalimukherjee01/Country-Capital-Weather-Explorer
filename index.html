@@ -12,60 +12,37 @@
   <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">🌍 Globe Weather</div>
-    <ul class="nav-links">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
     <!-- Dark Mode Toggle -->
     <label class="switch">
       <input type="checkbox" id="darkModeToggle">
       <span class="slider round"></span>
     </label>
   </nav>
+  <div class="container">
+    <!-- Hero / Home Section -->
+    <div class="hero" id="home">
+      <h1>Country & Capital Weather Explorer</h1>
+      <p>Search any country to see its details and live weather updates.</p>
+      <div class="search-box">
+        <input type="text" id="countryInput" placeholder="Enter country name">
+        <button id="searchBtn">Search</button>
+        <button id="geoBtn">🌍 Use My Location</button>
+        <!-- Results Card -->
+        <div id="results" class="results">
+          <p>Search results will appear here...</p>
+        </div>
+      </div>
+    </div>
 
-  <!-- Hero / Home Section -->
-  <section class="hero" id="home">
-    <h1>Country & Capital Weather Explorer</h1>
-    <p>Search any country to see its details and live weather updates.</p>
-  </section>
+    <!-- Search Box -->
 
-  <!-- Search Box -->
-  <section class="search-box">
-    <input type="text" id="countryInput" placeholder="Enter country name">
-    <button id="searchBtn">Search</button>
-    <button id="geoBtn">🌍 Use My Location</button>
-  </section>
-
-  <!-- Results Card -->
-  <div id="results" class="results">
-    <p>Search results will appear here...</p>
   </div>
-
-  <!-- About Section -->
-  <section class="about" id="about">
-    <h2>About Globe Weather</h2>
-    <p>
-      Globe Weather helps you explore real-time weather information for any country and its capital city.
-      It’s built with HTML, CSS, and JavaScript using open data APIs.
-    </p>
-  </section>
-
-  <!-- Contact Section -->
-  <section class="contact" id="contact">
-    <h2>Contact</h2>
-    <p>Have questions or suggestions? You can reach me here:</p>
-    <ul>
-      <li><a href="mailto:mukherjeepoushali05@gmail.com">📧 Email Me</a></li>
-      <li>🔗 <a href="http://www.linkedin.com/in/poushali-mukherjee-644aa4362" target="_blank">💼 LinkedIn</a></li>
-    </ul>
-  </section>
 
 
 
   <!-- Footer -->
   <div class="footer">
-    © 2025 Globe Weather | Built with ❤️ by <strong>Poushali Mukherjee </strong>using HTML, CSS & JS
+    © 2025 Globe Weather | Built with ❤️ by <strong>Poushali Mukherjee </strong>
   </div>
 
   <!-- Scripts -->
