@@ -1,8 +1,1 @@
-{
-  "rewrites": [
-    {
-      "source": "/api/weather",
-      "destination": "/api/weather.js"
-    }
-  ]
-}
+{}

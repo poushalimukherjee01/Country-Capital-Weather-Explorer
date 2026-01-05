@@ -18,7 +18,26 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { q, lat, lon } = req.query;
+  // Parse query parameters
+  // In Vercel, query params are available in req.query, but fallback to URL parsing
+  let q, lat, lon;
+  
+  if (req.query && Object.keys(req.query).length > 0) {
+    // Use req.query if available and not empty
+    q = req.query.q;
+    lat = req.query.lat;
+    lon = req.query.lon;
+  } else if (req.url) {
+    // Fallback: parse from URL if req.query is empty
+    try {
+      const url = new URL(req.url, `http://${req.headers?.host || 'localhost'}`);
+      q = url.searchParams.get('q');
+      lat = url.searchParams.get('lat');
+      lon = url.searchParams.get('lon');
+    } catch (e) {
+      console.error('Error parsing URL:', e);
+    }
+  }
   const API_KEY = process.env.OPENWEATHER_API_KEY;
 
   // Validate API key
