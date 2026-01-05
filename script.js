@@ -5,8 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const darkModeToggle = document.getElementById("darkModeToggle");
     const geoBtn = document.getElementById("geoBtn");
 
-    // === BACKEND URL (Vercel) ===
-    const SERVER_URL = "https://country-capital-weather-explorer-k8vx-nkufwz90r.vercel.app"; // Vercel serverless function
+    // === BACKEND URL (Auto-detect) ===
+    // Use relative path on Vercel, full URL on GitHub Pages/localhost
+    const isVercel = window.location.hostname.includes('vercel.app');
+    const VERCEL_API_URL = "https://country-capital-weather-explorer-k8vx-nkufwz90r.vercel.app/";
+    const SERVER_URL = isVercel ? "/api/weather" : VERCEL_API_URL;
 
     // === Dark Mode Toggle ===
     darkModeToggle.addEventListener("change", () => {
