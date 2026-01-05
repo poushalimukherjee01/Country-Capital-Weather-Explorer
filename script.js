@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const geoBtn = document.getElementById("geoBtn");
 
     // === BACKEND URL (Vercel) ===
-    const SERVER_URL = ""; // Replace with your deployed backend
+    const SERVER_URL = "/api/weather"; // Vercel serverless function
 
     // === Dark Mode Toggle ===
     darkModeToggle.addEventListener("change", () => {
@@ -107,8 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // === Display Results ===
-    console.log("Weather object from backend:", weather);
-
     function displayResults(country, weather) {
         const capital = country.capital ? country.capital[0] : null;
         const weatherAvailable = weather && weather.main && weather.weather;
