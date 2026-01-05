@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const geoBtn = document.getElementById("geoBtn");
 
     // === BACKEND URL (Vercel) ===
-    const SERVER_URL = "https://country-capital-weather-explorer-9i353tfp0.vercel.app/"; // Replace with your deployed backend
+    const SERVER_URL = ""; // Replace with your deployed backend
 
     // === Dark Mode Toggle ===
     darkModeToggle.addEventListener("change", () => {

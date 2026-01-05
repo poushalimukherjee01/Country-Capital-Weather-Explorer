@@ -1,23 +1,11 @@
-// backend/api/weather.js
-// Vercel serverless function handler (for Vercel deployments)
+// backend/routes/weather.js
+// Express router for non-Vercel deployments
+import express from 'express';
 import fetch from "node-fetch";
 
-export default async function handler(req, res) {
-  // Enable CORS
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+const router = express.Router();
 
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
-  }
-
-  if (req.method !== 'GET') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
+router.get('/', async (req, res) => {
   const { q, lat, lon } = req.query;
   const API_KEY = process.env.OPENWEATHER_API_KEY;
 
@@ -58,4 +46,6 @@ export default async function handler(req, res) {
     console.error("Weather API error:", err);
     res.status(500).json({ error: "Server error", details: err.message });
   }
-}
+});
+
+export default router;
