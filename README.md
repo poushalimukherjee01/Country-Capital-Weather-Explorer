@@ -86,7 +86,87 @@ Only config.example.js is shared in the repo as a template.
 
 5.The live site will be available at : https://poushalimukherjee01.github.io/Country-Capital-Weather-Explorer/
 
-Project Links
+---
+
+## 🧪 API Testing (For Recruiters/Testers)
+
+The backend API is **publicly accessible** and **requires NO authentication token**. You can test it directly using the following endpoints:
+
+### Base URL
+Replace `YOUR_VERCEL_URL` with your actual Vercel deployment URL (e.g., `https://your-app.vercel.app`)
+
+### Test Endpoint
+Quick test to verify the API is working:
+```
+GET YOUR_VERCEL_URL/api/test
+```
+
+**Example Response:**
+```json
+{
+  "success": true,
+  "message": "API is working correctly! No authentication required.",
+  "timestamp": "2024-01-01T12:00:00.000Z",
+  "endpoints": {
+    "weather": "/api/weather?q=London",
+    "test": "/api/test"
+  }
+}
+```
+
+### Weather Endpoint
+Get weather data for any city:
+```
+GET YOUR_VERCEL_URL/api/weather?q=London
+GET YOUR_VERCEL_URL/api/weather?lat=51.5074&lon=-0.1278
+```
+
+**Example Requests:**
+- Weather by city: `https://your-app.vercel.app/api/weather?q=Paris`
+- Weather by coordinates: `https://your-app.vercel.app/api/weather?lat=48.8566&lon=2.3522`
+
+**Example Response:**
+```json
+{
+  "coord": { "lon": -0.1278, "lat": 51.5074 },
+  "weather": [{ "main": "Clear", "description": "clear sky" }],
+  "main": { "temp": 15.5, "feels_like": 14.2 },
+  "name": "London"
+}
+```
+
+### Testing in Browser
+Simply open these URLs directly in your browser:
+- Test endpoint: `YOUR_VERCEL_URL/api/test`
+- Weather endpoint: `YOUR_VERCEL_URL/api/weather?q=Tokyo`
+
+### Testing with cURL
+```bash
+# Test endpoint
+curl https://your-app.vercel.app/api/test
+
+# Weather endpoint
+curl https://your-app.vercel.app/api/weather?q=New%20York
+```
+
+### Testing with JavaScript/Fetch
+```javascript
+// Test endpoint
+fetch('https://your-app.vercel.app/api/test')
+  .then(res => res.json())
+  .then(data => console.log(data));
+
+// Weather endpoint
+fetch('https://your-app.vercel.app/api/weather?q=London')
+  .then(res => res.json())
+  .then(data => console.log(data));
+```
+
+**Note:** All endpoints are CORS-enabled and require **NO authentication tokens or API keys** for testing purposes.
+
+---
+
+## 🔗 Project Links
 
 Repository: https://github.com/poushalimukherjee01/Country-Capital-Weather-Explorer
 

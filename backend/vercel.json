@@ -12,6 +12,10 @@
       "dest": "/api/weather.js"
     },
     {
+      "src": "/api/test",
+      "dest": "/api/test.js"
+    },
+    {
       "src": "/",
       "dest": "/api/index.js"
     }

@@ -1,9 +1,10 @@
 // api/weather.js
 // Vercel serverless function handler (for Vercel deployments)
+// PUBLIC API - No authentication required
 import fetch from "node-fetch";
 
 export default async function handler(req, res) {
-  // Enable CORS
+  // Enable CORS - Allow all origins for public access
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
