@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const geoBtn = document.getElementById("geoBtn");
 
     // === BACKEND URL (Vercel) ===
-    const SERVER_URL = "https://country-capital-weather-explorer-k8vx-nkufwz90r.vercel.app/api/weather"; // Vercel serverless function
+    const SERVER_URL = "https://country-capital-weather-explorer-k8vx-nkufwz90r.vercel.app/"; // Vercel serverless function
 
     // === Dark Mode Toggle ===
     darkModeToggle.addEventListener("change", () => {
