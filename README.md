@@ -92,6 +92,8 @@ Only config.example.js is shared in the repo as a template.
 
 The backend API is **publicly accessible** and **requires NO authentication token**. You can test it directly using the following endpoints:
 
+> **⚠️ Important:** If recruiters are getting authentication errors, check your Vercel dashboard settings. See [`VERCEL_SETTINGS_GUIDE.md`](./VERCEL_SETTINGS_GUIDE.md) for detailed instructions on making your deployment public.
+
 ### Base URL
 Replace `YOUR_VERCEL_URL` with your actual Vercel deployment URL (e.g., `https://your-app.vercel.app`)
 
