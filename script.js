@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // === BACKEND URL (Auto-detect) ===
     // Use relative path on Vercel, full URL on GitHub Pages/localhost
     const isVercel = window.location.hostname.includes('vercel.app');
-    const VERCEL_API_URL = "https://country-capital-weather-explorer-k8vx-nkufwz90r.vercel.app/";
+    const VERCEL_API_URL = "https://country-capital-weather-explorer-k8vx-nkufwz90r.vercel.app/api/weather";
     const SERVER_URL = isVercel ? "/api/weather" : VERCEL_API_URL;
 
     // === Dark Mode Toggle ===
